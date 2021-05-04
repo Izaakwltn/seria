@@ -50,7 +50,7 @@
     "Generates a prime-order for building the matrix (y axis of matrix)."
           (mapcar #'(lambda (n)
                 (cond ((zerop n) 0 )
-                      ((- 12 n))))(interval-list (first row) row)))
+                      ((- 12 n))))(interval-list row)))
 
 (defun interval-list (row)
     "Generates list of intervals for the whole row, starting with 0
@@ -60,7 +60,7 @@
 (defun interval-list-backend (tone row)
     (cond ((null row) nil)
           (t (cons (interval tone (first row)) 
-                   (interval-list tone (rest row))))))
+                   (interval-list-backend tone (rest row))))))
 
 ;;;--------------------------------------------------------------------------
 ;;;3. Matrix Operations- Prime, Retrograde, Inverse, Inverse-retrograde
@@ -83,7 +83,7 @@
     (defun find-nth-interval (n row)
         "Finds n in interval-list, returns numeric spot."
         (cond ((equal n (first row)) (- 12 (length row)))
-              (t (find-nth-value n (rest row))))) 
+              (t (find-nth-interval n (rest row))))) 
 
 (defun r-inverse (n row)
     "Takes interval and row, returns RI-n Retrograde Inverse"
@@ -142,9 +142,58 @@
 (defun smatrix (row)
     "Creates a traditional matrix for a given row"
     (mapcar #'standard-row (matrix-builder row)))
-    
+
 ;;;--------------------------------------------------------------------------
-;;;6. Print-Friendly Procedures- coming soon
+;;;6. Print-Friendly Procedures- in progress
 ;;;--------------------------------------------------------------------------
 ;;basically the same functions pmatrix, prow, pprime, etc, but they print better
+
+(defun pprime (n row)
+    "Aesthetically polite prime-row printer."
+    (format t "Prime-~S: ~S" n (prime n row)))
+
+(defun pmatrix (row)
+    "Potentially pleasing matrix printer."
+    (format t "~&")
+    (format t "Matrix ~S:~%" row)
+    (pmatrix-row (tone-matrix row)))
+
+(defun pmatrix-row (matrix)
+    "Backend for pmatrix."
+    (cond ((null matrix) nil)
+          (t (format t "~&~S" (first matrix)) (matrix-row (rest matrix))))
+
+(defun pmatrix-complete (row)
+    "Matrix, pretty printed with axis notations."
+    (format t "~&Matrix ~S:~%~%" row)
+    (format t "  ~S~S~%~S~%" (inverse-line-printer row) 
+                       (pmatrix-printer (prime-order row) (tone-matrix row))
+                       (r-i-line-printer row)))
+
+(defun pmatrix-printer (prime-list matrix)
+    "Backend for pmatrix-complete."
+    (cond ((null prime-list) (format t "~&"))
+    (t (format t "~&P~S ~S R~S "
+                (first prime-list) (first matrix) (first prime-list))
+       (pmatrix-printer (rest prime-list) (rest matrix))))))
+
+(defun inverse-line-printer (row)
+    "Prints inverse values for pmatrix-complete."
+    (inverse-line (interval-list row)))
+
+(defun inverse-line (inverse-row)
+    "Backend for inverse-line-printer."
+    (cond ((null inverse-row) (format t "~&"))
+          (t (format t "I~S " (first inverse-row)) 
+             (inverse-line (rest inverse-row)))))
+
+(defun r-i-line-printer (row)
+    "Prints retrograde inverse values for pmatrix-complete."
+    (retro-inverse-line (interval-list row)))
+
+(defun retro-inverse-line (inverse-row)
+    "Backend for r-i-line-printer."
+    (cond ((null inverse-row) (format t "~&"))
+          (t (format t "RI~S " (first inverse-row)) 
+             (retro-inverse-line (rest inverse-row)))))
 
