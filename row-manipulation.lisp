@@ -25,6 +25,10 @@
           (t (cons (transpose-tone (first row) interval) 
 		   (transpose-row (rest row) interval)))))
 
+(defun interval-list (row)
+  (loop for n in (tone-list row)
+		collect (interval (first (tone-list row)) n)))
+
 ;;;;------------------------------------------------------------------------
 ;;;;Manipulations- Prime, Retrograde, Inverse, Inverse-retrograde
 ;;;;
@@ -32,11 +36,27 @@
 
 (defun prime (n row)
   "Takes root and row, returns transposed P-n prime."
-  (make-row (transpose-row row (interval (first row) n))))
+  (make-row 'prime (transpose-row (tone-list row) (interval (first (tone-list row)) n))))
 
-(defun retrograde (state n row)
+(defun retrograde (n row)
   "Takes root and row, returns R-n retrograde."
-  (make-row state (reverse (transpose-row row (interval (nth (- (length row) 1) row) n)))))
+  (make-row 'retrograde (reverse (tone-list (prime n row)))))
+
+(defun find-nth-interval (n row)
+        "Finds n in tone-row, returns numeric spot."
+        (cond ((equal n (first row)) (- 12 (length row)))
+              (t (find-nth-interval n (rest row)))))
+
+(defun inverse (n row)
+  "Takes root and row, returns I-n inverse."
+  (make-row 'inverse (mapcar #'(lambda (matrix-row)
+               (nth (find-nth-interval n (tone-list row))
+                    matrix-row))
+	  (rows (build-matrix row)))))
+
+(defun retrograde-inverse (n row)
+  "Takes root and row, returns RI-n Retrograde Inverse"
+  (make-row 'retrograde-inverse (reverse (tone-list (inverse n row)))))
 
 
 	     

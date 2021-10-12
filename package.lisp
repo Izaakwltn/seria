@@ -16,7 +16,9 @@
    #:interval
    #:transpose-row
    #:prime
-   #:retrograde)
+   #:retrograde
+   #:inverse
+   #:retrograde-inverse)
    
    
   ;;;;matrix.lisp
