@@ -83,7 +83,16 @@ SERIA> (prime 5 test-row)
 (5 10 7 3 8 11 12 4 6 1 9 2)>
  
 SERIA> (retrograde 5 test-row)
-#<ROW RETROGRADE-5: 
+#<ROW RETROGRADE-2: 
 
-(5 12 4 9 7 3 2 11 6 10 1 8)>
+(2 9 1 6 4 12 11 8 3 7 10 5)>
   
+SERIA> (inverse 5 test-row)
+#<ROW INVERSE-5: 
+
+(5 12 3 7 2 11 10 6 4 9 1 8)>
+  
+SERIA> (retrograde-inverse 5 test-row)
+#<ROW RETROGRADE-INVERSE-8: 
+
+(8 1 9 4 6 10 11 2 7 3 12 5)>
