@@ -75,4 +75,15 @@ Matrix:
               
 (0 5 2 T 3 6 7 E 1 8 4 9)>
 
-And find prime/retrograde/inverse/retrograde-inverse row derivations using the following commands:
+### And find prime/retrograde/inverse/retrograde-inverse row derivations using the following commands:
+  
+SERIA> (prime 5 test-row)
+#<ROW PRIME-5: 
+
+(5 10 7 3 8 11 12 4 6 1 9 2)>
+ 
+SERIA> (retrograde 5 test-row)
+#<ROW RETROGRADE-5: 
+
+(5 12 4 9 7 3 2 11 6 10 1 8)>
+  
