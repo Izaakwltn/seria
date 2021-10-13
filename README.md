@@ -96,3 +96,35 @@ SERIA> (retrograde-inverse 5 test-row)
 #<ROW RETROGRADE-INVERSE-8: 
 
 (8 1 9 4 6 10 11 2 7 3 12 5)>
+  
+### Also, You can create a matrix using note names instead of numeric values:
+SERIA> (note-matrix test-row)
+#<TONE-MATRIX 
+Prime:
+(A D B G C D#/EB E G#/AB A#/BB F C#/DB F#/GB)
+
+Matrix:
+(A D B G C D#/EB E G#/AB A#/BB F C#/DB F#/GB)
+              
+(E A F#/GB D G A#/BB B D#/EB F C G#/AB C#/DB)
+              
+(G C A F A#/BB C#/DB D F#/GB G#/AB D#/EB B E)
+              
+(B E C#/DB A D F F#/GB A#/BB C G D#/EB G#/AB)
+              
+(F#/GB B G#/AB E A C C#/DB F G D A#/BB D#/EB)
+              
+(D#/EB G#/AB F C#/DB F#/GB A A#/BB D E B G C)
+              
+(D G E C F G#/AB A C#/DB D#/EB A#/BB F#/GB B)
+              
+(A#/BB D#/EB C G#/AB C#/DB E F A B F#/GB D G)
+              
+(G#/AB C#/DB A#/BB F#/GB B D D#/EB G A E C F)
+              
+(C#/DB F#/GB D#/EB B E G G#/AB C D A F A#/BB)
+              
+(F A#/BB G D#/EB G#/AB B C E F#/GB C#/DB A D)
+              
+(C F D A#/BB D#/EB F#/GB G B C#/DB G#/AB E A)
+>
