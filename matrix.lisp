@@ -17,7 +17,7 @@
     (with-accessors ((prime-row prime-row)
 		     (rows rows))
 	obj
-      (format stream "~%Prime:~%~a~%~%Matrix:~%~{~a~%~}" (tone-list prime-row) rows))))
+      (format stream "~%Prime:~%~a~%~%Matrix:~%~{~a~%~}" prime-row rows))))
 ;~%~{~a~%~}
 (defun prime-order (row)
   "Generates a prime-order for building the matrix (y axis of matrix)."

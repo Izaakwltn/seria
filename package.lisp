@@ -28,5 +28,7 @@
   ;;;;standardize.lisp
   (:export
    #:standard-row
-   #:standard-matrix)
+   #:standard-matrix
+   #:note-row
+   #:note-matrix)
   )
