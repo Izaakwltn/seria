@@ -5,17 +5,19 @@
 ;;;;------------------------------------------------------------------------
 ;;;;Standardization
 ;;;;------------------------------------------------------------------------
-(defun standard-row (row)
-    "Conforms the row to traditional '(0 1 2 3 4 5 6 7 8 9 t e) notation."
-    (cond ((null row) nil)
-          ((equal (first row) 11) (cons 't (standard-row (rest row))))
-          ((equal (first row) 12) (cons 'e (standard-row (rest row))))
-          (t (cons (transpose-tone (first row) -1)
-                   (standard-row (rest row))))))
+(defmethod standard-tone (tone)
+  (cond ((equal tone 11) 't)
+	((equal tone 12) 'e)
+	(t (transpose-tone tone -1))))
 
-(defun standard-matrix (row)
+(defmethod standardize ((row row))
+    "Conforms the row to traditional '(0 1 2 3 4 5 6 7 8 9 t e) notation."
+  (loop :for i :in (tone-list row)
+	:collect (standard-tone i)))
+
+(defmethod standard-matrix ((row row))
   (make-instance 'tone-matrix :prime-row row
-			      :rows (mapcar #'standard-row (mapcar #'(lambda (n)
+			      :rows (mapcar #'standardize (mapcar #'(lambda (n)
 						(transpose-row (tone-list row) n))
 								   (prime-order row)))))
 

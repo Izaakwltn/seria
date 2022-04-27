@@ -18,16 +18,17 @@
 		     (rows rows))
 	obj
       (format stream "~%Prime:~%~a~%~%Matrix:~%~{~a~%~}" prime-row rows))))
-;~%~{~a~%~}
-(defun prime-order (row)
+					;~%~{~a~%~}
+
+(defmethod prime-order ((row row))
   "Generates a prime-order for building the matrix (y axis of matrix)."
   (mapcar #'(lambda (n)
 	      (if (zerop n) 0
 		  (- 12 n)))
-	  (loop for n in (tone-list row)
-		collect (interval (first (tone-list row)) n))))
+	  (loop :for n :in (tone-list row)
+		:collect (interval (first (tone-list row)) n))))
 
-(defun build-matrix (row)
+(defmethod build-matrix ((row row))
   (make-instance 'tone-matrix :prime-row row
 			      :rows (mapcar #'(lambda (n)
 						(transpose-row (tone-list row) n))

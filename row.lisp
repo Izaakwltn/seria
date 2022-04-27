@@ -18,7 +18,7 @@
 ;;;;------------------------------------------------------------------------
 
 (defclass row ()
-  ((state   :initarg :state
+  ((state     :initarg :state
 	      :initform 'Prime 
 	      :accessor state)
    (root      :initarg :root

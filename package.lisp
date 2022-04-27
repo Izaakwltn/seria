@@ -30,5 +30,4 @@
    #:standard-row
    #:standard-matrix
    #:note-row
-   #:note-matrix)
-  )
+   #:note-matrix))
