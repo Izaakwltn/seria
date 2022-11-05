@@ -5,7 +5,7 @@
 (asdf:defsystem #:seria
   :version "0.0.1"
   :author "Izaak Walton <izaakw@protonmail.com>"
-  :license "GNU General Purpose License"
+  :license "MIT"
   :description "A module for building 12 tone tone-rows and matrices."
   :depends-on (:alexandria)
   :serial t
